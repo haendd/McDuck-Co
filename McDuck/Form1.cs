@@ -98,10 +98,6 @@ namespace McDuck
         {
             string current = Directory.GetCurrentDirectory();
             string configPath = current + "\\config.txt";
-            if (!File.Exists(configPath))
-            {
-                File.Create(configPath);
-            }
             StreamWriter sw = new StreamWriter(configPath);
             string start;
 
