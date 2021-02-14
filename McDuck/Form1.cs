@@ -72,12 +72,20 @@ namespace McDuck
             string type = launcherCryptoSelector.Text;
             string walletAddress = "N/A";
             string poolAddress = "N/A";
+            string current = Directory.GetCurrentDirectory();
 
             switch (type) 
             {
                 case "Ethereum":
                     walletAddress = ethereumWalletAddressInput.Text;
                     poolAddress = ethereumPoolAddressInput.Text;
+                    StreamWriter sw = new StreamWriter(current + "\\Mining\\Ethereum\\1_Ehereum-nanopool.bat");
+                    sw.WriteLine("EthDcrMiner64.exe -epool " + poolAddress + " -ewal " + walletAddress + " -eworker Claymore -epsw x -mode 1 -r 0 -dbg -1 -mport 0 -etha 0 -retrydelay 1 -ftime 55 -tt 79 -ttli 77 -tstop 89 -tstart 79");
+                    sw.WriteLine("pause");
+                    sw.Close();
+                    Directory.SetCurrentDirectory(current + "\\Mining\\Ethereum");
+                    System.Diagnostics.Process.Start("1_Ehereum-nanopool.bat");
+                    Directory.SetCurrentDirectory(current);
                     break;
                 case "Monero":
                     walletAddress = moneroWalletAddressInput.Text;
