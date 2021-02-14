@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,11 +9,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace McDuck
 {
+
+    public class nProcess
+    {
+        public ThreadStart ths;
+        public Thread th;
+        public Process process;
+        private String directory;
+
+        public nProcess(Process proc, String direct)
+        {
+            process = proc;
+            directory = direct;
+        }
+
+        public void launchMiner()
+        {
+            Directory.SetCurrentDirectory(directory);
+            bool started = process.Start();
+        }
+    }
     public partial class Form : System.Windows.Forms.Form
     {
+
+        private string consoleOutput = "";
+        private nProcess np;
+        private bool runing = false;
+        private string type;
+        private static string current = Directory.GetCurrentDirectory();
+
         public Form()
         {
             InitializeComponent();
@@ -21,8 +50,8 @@ namespace McDuck
         private void Form_Load(object sender, EventArgs e)
         {
             string line;
-            string current = Directory.GetCurrentDirectory();
-            string configPath = current + "\\config.txt";
+            String configPath = Directory.GetCurrentDirectory();
+            configPath += "\\config.txt";
             if (!File.Exists(configPath)) 
             {
                 File.Create(configPath);
@@ -67,12 +96,23 @@ namespace McDuck
 
         }
 
+        private InvalidateEventHandler consoleWrite()
+        {
+            consoleTextBox.Text += consoleOutput;
+            return null;
+        }
+
         private void launchButton_Click(object sender, EventArgs e)
         {
-            string type = launcherCryptoSelector.Text;
+
+            if(runing)
+            {
+                return;
+            }
+            type = launcherCryptoSelector.Text;
             string walletAddress = "N/A";
             string poolAddress = "N/A";
-            string current = Directory.GetCurrentDirectory();
+
 
             switch (type) 
             {
@@ -83,9 +123,22 @@ namespace McDuck
                     sw.WriteLine("EthDcrMiner64.exe -epool " + poolAddress + " -ewal " + walletAddress + " -eworker Claymore -epsw x -mode 1 -r 0 -dbg -1 -mport 0 -etha 0 -retrydelay 1 -ftime 55 -tt 79 -ttli 77 -tstop 89 -tstart 79");
                     sw.WriteLine("pause");
                     sw.Close();
-                    Directory.SetCurrentDirectory(current + "\\Mining\\Ethereum");
-                    System.Diagnostics.Process.Start("1_Ehereum-nanopool.bat");
-                    Directory.SetCurrentDirectory(current);
+
+                    var process = new Process();
+                    var startinfo = new ProcessStartInfo("1_Ehereum-nanopool.bat");
+                    
+                    startinfo.RedirectStandardOutput = false;
+                    startinfo.UseShellExecute = false;
+                    startinfo.CreateNoWindow = false;
+                    process.StartInfo = startinfo;
+                    process.EnableRaisingEvents = true;
+
+                    np = new nProcess(process, Directory.GetCurrentDirectory() + "\\Mining\\Ethereum");
+                    np.ths = new ThreadStart(() => np.launchMiner());
+                    np.th = new Thread(np.ths);
+
+                    runing = true;
+                    np.th.Start();
                     break;
                 case "Monero":
                     walletAddress = moneroWalletAddressInput.Text;
@@ -99,6 +152,29 @@ namespace McDuck
 
         private void stopButton_Click(object sender, EventArgs e)
         {
+            if(!runing)
+            {
+                return;
+            }
+            switch (type)
+            {
+                case "Ethereum":
+                    foreach (var process in Process.GetProcessesByName("EthDcrMiner64"))
+                    {
+                        process.Kill();
+                    }
+                    foreach (var process in Process.GetProcessesByName("cmd"))
+                    {
+                        process.Kill();
+                    }
+                    Directory.SetCurrentDirectory(current);
+                    runing = false;
+                    break;
+                case "Monero":
+                    break;
+                default:
+                    break;
+            }
 
         }
 
