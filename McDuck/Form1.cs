@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using Newtonsoft.Json.Linq;
 
 namespace McDuck
 {
@@ -96,17 +97,20 @@ namespace McDuck
 
             switch (type) 
             {
+
                 case "Ethereum":
+                {
                     walletAddress = ethereumWalletAddressInput.Text;
                     poolAddress = ethereumPoolAddressInput.Text;
                     StreamWriter sw = new StreamWriter(current + "\\Mining\\Ethereum\\1_Ehereum-nanopool.bat");
-                    sw.WriteLine("EthDcrMiner64.exe -epool " + poolAddress + " -ewal " + walletAddress + " -eworker Claymore -epsw x -mode 1 -r 0 -dbg -1 -mport 0 -etha 0 -retrydelay 1 -ftime 55 -tt 79 -ttli 77 -tstop 89 -tstart 79");
+                    sw.WriteLine("EthDcrMiner64.exe -epool " + poolAddress + " -ewal " + walletAddress +
+                                 " -eworker Claymore -epsw x -mode 1 -r 0 -dbg -1 -mport 0 -etha 0 -retrydelay 1 -ftime 55 -tt 79 -ttli 77 -tstop 89 -tstart 79");
                     sw.WriteLine("pause");
                     sw.Close();
 
                     var process = new Process();
                     var startinfo = new ProcessStartInfo("1_Ehereum-nanopool.bat");
-                    
+
                     startinfo.RedirectStandardOutput = false;
                     startinfo.UseShellExecute = false;
                     startinfo.CreateNoWindow = false;
@@ -120,12 +124,40 @@ namespace McDuck
                     runing = true;
                     np.th.Start();
                     break;
-
+                }
                 case "Monero":
+                {
                     walletAddress = moneroWalletAddressInput.Text;
                     poolAddress = moneroPoolAddressInput.Text;
-                    break;
 
+                    JObject o1 = JObject.Parse(File.ReadAllText(current +  "\\Mining\\Monero\\config.json"));
+                    JArray item = (JArray) o1["pools"];
+                    foreach (var thing in item)
+                    {
+                        thing["url"] = poolAddress;
+                        thing["user"] = walletAddress;
+
+                    }
+
+                    File.WriteAllText(current + "\\Mining\\Monero\\config.json", o1.ToString());
+                    var process = new Process();
+                    var startinfo = new ProcessStartInfo("xmrig.exe");
+
+                    startinfo.RedirectStandardOutput = false;
+                    startinfo.UseShellExecute = false;
+                    startinfo.CreateNoWindow = false;
+                    process.StartInfo = startinfo;
+                    process.EnableRaisingEvents = true;
+
+                    np = new nProcess(process, Directory.GetCurrentDirectory() + "\\Mining\\Monero");
+                    np.ths = new ThreadStart(() => np.launchMiner());
+                    np.th = new Thread(np.ths);
+
+                    runing = true;
+                    np.th.Start();
+
+                    break;
+                }
                 default:
 
                     break;
@@ -154,6 +186,16 @@ namespace McDuck
                     break;
 
                 case "Monero":
+                    foreach (var process in Process.GetProcessesByName("xmrig"))
+                    {
+                        process.Kill();
+                    }
+                    foreach (var process in Process.GetProcessesByName("cmd"))
+                    {
+                        process.Kill();
+                    }
+                    Directory.SetCurrentDirectory(current);
+                    runing = false;
                     break;
 
                 default:
