@@ -13,26 +13,6 @@ using System.Threading;
 
 namespace McDuck
 {
-
-    public class nProcess
-    {
-        public ThreadStart ths;
-        public Thread th;
-        public Process process;
-        private String directory;
-
-        public nProcess(Process proc, String direct)
-        {
-            process = proc;
-            directory = direct;
-        }
-
-        public void launchMiner()
-        {
-            Directory.SetCurrentDirectory(directory);
-            bool started = process.Start();
-        }
-    }
     public partial class Form : System.Windows.Forms.Form
     {
 
@@ -140,10 +120,12 @@ namespace McDuck
                     runing = true;
                     np.th.Start();
                     break;
+
                 case "Monero":
                     walletAddress = moneroWalletAddressInput.Text;
                     poolAddress = moneroPoolAddressInput.Text;
                     break;
+
                 default:
 
                     break;
@@ -170,8 +152,10 @@ namespace McDuck
                     Directory.SetCurrentDirectory(current);
                     runing = false;
                     break;
+
                 case "Monero":
                     break;
+
                 default:
                     break;
             }
@@ -180,6 +164,10 @@ namespace McDuck
 
         private void saveButton_Click(object sender, EventArgs e)
         {
+            if (runing)
+            {
+                return;
+            }
             string current = Directory.GetCurrentDirectory();
             string configPath = current + "\\config.txt";
             StreamWriter sw = new StreamWriter(configPath);
@@ -195,6 +183,27 @@ namespace McDuck
 
             //close the file
             sw.Close();
+        }
+
+    }
+
+    public class nProcess
+    {
+        public ThreadStart ths;
+        public Thread th;
+        public Process process;
+        private String directory;
+
+        public nProcess(Process proc, String direct)
+        {
+            process = proc;
+            directory = direct;
+        }
+
+        public void launchMiner()
+        {
+            Directory.SetCurrentDirectory(directory);
+            bool started = process.Start();
         }
     }
 }

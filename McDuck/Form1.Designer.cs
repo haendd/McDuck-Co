@@ -30,7 +30,7 @@
         {
             this.tabControl = new System.Windows.Forms.TabControl();
             this.launcherPage = new System.Windows.Forms.TabPage();
-            this.saveButton = new System.Windows.Forms.Button();
+            this.consoleTextBox = new System.Windows.Forms.RichTextBox();
             this.launcherCryptoSelectLabel = new System.Windows.Forms.Label();
             this.launcherCryptoSelector = new System.Windows.Forms.ComboBox();
             this.stopButton = new System.Windows.Forms.Button();
@@ -38,16 +38,17 @@
             this.walletSetupPage = new System.Windows.Forms.TabPage();
             this.cryptoTypePages = new System.Windows.Forms.TabControl();
             this.ethereumSetupPage = new System.Windows.Forms.TabPage();
+            this.ethereumSaveButton = new System.Windows.Forms.Button();
             this.ethereumPoolAddressInput = new System.Windows.Forms.TextBox();
             this.ethereumPoolAddressLabel = new System.Windows.Forms.Label();
             this.ethereumWalletAddressInput = new System.Windows.Forms.TextBox();
             this.ethereumWalletAddressLabel = new System.Windows.Forms.Label();
             this.moneroSetupPage = new System.Windows.Forms.TabPage();
+            this.moneroSaveButton = new System.Windows.Forms.Button();
             this.moneroPoolAddressInput = new System.Windows.Forms.TextBox();
             this.moneroPoolAddressLabel = new System.Windows.Forms.Label();
             this.moneroWalletAddressInput = new System.Windows.Forms.TextBox();
             this.moneroWalletAddressLabel = new System.Windows.Forms.Label();
-            this.consoleTextBox = new System.Windows.Forms.RichTextBox();
             this.tabControl.SuspendLayout();
             this.launcherPage.SuspendLayout();
             this.walletSetupPage.SuspendLayout();
@@ -70,7 +71,6 @@
             // launcherPage
             // 
             this.launcherPage.Controls.Add(this.consoleTextBox);
-            this.launcherPage.Controls.Add(this.saveButton);
             this.launcherPage.Controls.Add(this.launcherCryptoSelectLabel);
             this.launcherPage.Controls.Add(this.launcherCryptoSelector);
             this.launcherPage.Controls.Add(this.stopButton);
@@ -83,15 +83,13 @@
             this.launcherPage.Text = "Launcher";
             this.launcherPage.UseVisualStyleBackColor = true;
             // 
-            // saveButton
+            // consoleTextBox
             // 
-            this.saveButton.Location = new System.Drawing.Point(11, 301);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 23);
-            this.saveButton.TabIndex = 5;
-            this.saveButton.Text = "Save";
-            this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            this.consoleTextBox.Location = new System.Drawing.Point(11, 59);
+            this.consoleTextBox.Name = "consoleTextBox";
+            this.consoleTextBox.Size = new System.Drawing.Size(319, 236);
+            this.consoleTextBox.TabIndex = 6;
+            this.consoleTextBox.Text = "";
             // 
             // launcherCryptoSelectLabel
             // 
@@ -128,10 +126,11 @@
             this.launchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.launchButton.Location = new System.Drawing.Point(119, 301);
+            this.launchButton.Location = new System.Drawing.Point(11, 301);
             this.launchButton.Name = "launchButton";
             this.launchButton.Size = new System.Drawing.Size(75, 23);
             this.launchButton.TabIndex = 0;
+            this.launchButton.BackColor = System.Drawing.Color.Green;
             this.launchButton.Text = "Launch";
             this.launchButton.UseVisualStyleBackColor = true;
             this.launchButton.Click += new System.EventHandler(this.launchButton_Click);
@@ -159,6 +158,7 @@
             // 
             // ethereumSetupPage
             // 
+            this.ethereumSetupPage.Controls.Add(this.ethereumSaveButton);
             this.ethereumSetupPage.Controls.Add(this.ethereumPoolAddressInput);
             this.ethereumSetupPage.Controls.Add(this.ethereumPoolAddressLabel);
             this.ethereumSetupPage.Controls.Add(this.ethereumWalletAddressInput);
@@ -170,6 +170,16 @@
             this.ethereumSetupPage.TabIndex = 0;
             this.ethereumSetupPage.Text = "Ethereum";
             this.ethereumSetupPage.UseVisualStyleBackColor = true;
+            // 
+            // ethereumSaveButton
+            // 
+            this.ethereumSaveButton.Location = new System.Drawing.Point(250, 274);
+            this.ethereumSaveButton.Name = "ethereumSaveButton";
+            this.ethereumSaveButton.Size = new System.Drawing.Size(75, 23);
+            this.ethereumSaveButton.TabIndex = 4;
+            this.ethereumSaveButton.Text = "Save";
+            this.ethereumSaveButton.UseVisualStyleBackColor = true;
+            this.ethereumSaveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // ethereumPoolAddressInput
             // 
@@ -207,6 +217,7 @@
             // 
             // moneroSetupPage
             // 
+            this.moneroSetupPage.Controls.Add(this.moneroSaveButton);
             this.moneroSetupPage.Controls.Add(this.moneroPoolAddressInput);
             this.moneroSetupPage.Controls.Add(this.moneroPoolAddressLabel);
             this.moneroSetupPage.Controls.Add(this.moneroWalletAddressInput);
@@ -218,6 +229,16 @@
             this.moneroSetupPage.TabIndex = 1;
             this.moneroSetupPage.Text = "Monero";
             this.moneroSetupPage.UseVisualStyleBackColor = true;
+            // 
+            // moneroSaveButton
+            // 
+            this.moneroSaveButton.Location = new System.Drawing.Point(250, 274);
+            this.moneroSaveButton.Name = "moneroSaveButton";
+            this.moneroSaveButton.Size = new System.Drawing.Size(75, 23);
+            this.moneroSaveButton.TabIndex = 4;
+            this.moneroSaveButton.Text = "Save";
+            this.moneroSaveButton.UseVisualStyleBackColor = true;
+            this.moneroSaveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // moneroPoolAddressInput
             // 
@@ -253,15 +274,6 @@
             this.moneroWalletAddressLabel.Size = new System.Drawing.Size(85, 15);
             this.moneroWalletAddressLabel.TabIndex = 0;
             this.moneroWalletAddressLabel.Text = "Wallet Address";
-            // 
-            // consoleTextBox
-            // 
-            this.consoleTextBox.Location = new System.Drawing.Point(11, 59);
-            this.consoleTextBox.Name = "consoleTextBox";
-            this.consoleTextBox.Size = new System.Drawing.Size(319, 236);
-            this.consoleTextBox.TabIndex = 6;
-            this.consoleTextBox.Text = "";
-            this.consoleTextBox.Invalidated += consoleWrite();
             // 
             // Form
             // 
@@ -306,8 +318,9 @@
         private System.Windows.Forms.Label moneroPoolAddressLabel;
         private System.Windows.Forms.TextBox moneroWalletAddressInput;
         private System.Windows.Forms.Label moneroWalletAddressLabel;
-        private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.RichTextBox consoleTextBox;
+        private System.Windows.Forms.Button ethereumSaveButton;
+        private System.Windows.Forms.Button moneroSaveButton;
     }
 }
 
