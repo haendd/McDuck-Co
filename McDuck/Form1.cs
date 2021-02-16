@@ -317,6 +317,7 @@ namespace McDuck
             switch (cpuActiveType)
             {
                 case "Monero":
+                    cpuProfit = getDollarsPerDayxmr(nanoCaller.getCurrentHashrate(moneroWalletAddressInput.Text, "xmr"));
                     break;
                 default:
                     break;
@@ -325,7 +326,7 @@ namespace McDuck
             switch (gpuActiveType)
             {
                 case "Ethereum":
-                    gpuProfit = getDollarsPerDay(nanoCaller.getCurrentHashrate(ethereumWalletAddressInput.Text));
+                    gpuProfit = getDollarsPerDayeth(nanoCaller.getCurrentHashrate(ethereumWalletAddressInput.Text, "eth"));
                     break;
                 default:
                     break;
@@ -351,7 +352,16 @@ namespace McDuck
                 profitPerDayLabel.BackColor = deactiveColor;
         }
 
-        private double getDollarsPerDay(Double hashrate)
+
+        private double getDollarsPerDayxmr(Double hashrate)
+        {
+            var networkHashRate = 2022000000;
+            var totalMoneyPerDay = 183332.333393;
+            var yourHashRate = hashrate;
+            var profit_ratio = yourHashRate / networkHashRate;
+            return totalMoneyPerDay * profit_ratio;
+        }
+        private double getDollarsPerDayeth(Double hashrate)
         {
             var networkHashRate = 420157;
             var totalMoneyPerDay = 46337706.66;
@@ -440,6 +450,8 @@ namespace McDuck
 }
 
 
+//coin = eth for etherum
+//coin = xmr for monero
 public class NanoPoolsAPI
 {
     private HttpClient client;
@@ -448,10 +460,10 @@ public class NanoPoolsAPI
          this.client = new HttpClient();
     }
 
-    public double getMinerBalance(String walletAddress)
+    public double getMinerBalance(String walletAddress, string coin)
     {
         
-        HttpResponseMessage response = this.client.GetAsync("https://api.nanopool.org/v1/eth/balance/" + walletAddress).Result;
+        HttpResponseMessage response = this.client.GetAsync("https://api.nanopool.org/v1/" + coin + "balance/" + walletAddress).Result;
         if (response.IsSuccessStatusCode)
         {
             JObject responseJson = JObject.Parse(response.Content.ReadAsStringAsync().Result);
@@ -464,9 +476,9 @@ public class NanoPoolsAPI
 
     }
 
-    public double getCurrentHashrate(String walletAddress)
+    public double getCurrentHashrate(String walletAddress, string coin)
     { 
-        HttpResponseMessage response = this.client.GetAsync("https://api.nanopool.org/v1/eth/hashrate/" + walletAddress).Result;
+        HttpResponseMessage response = this.client.GetAsync("https://api.nanopool.org/v1/" + coin + "/hashrate/" + walletAddress).Result;
         if (response.IsSuccessStatusCode)
         {
             JObject responseJson = JObject.Parse(response.Content.ReadAsStringAsync().Result);
@@ -479,9 +491,9 @@ public class NanoPoolsAPI
 
     }
 
-    public double getAverageHashrate(String walletAddress)
+    public double getAverageHashrate(String walletAddress, string coin)
     {
-        HttpResponseMessage response = this.client.GetAsync("https://api.nanopool.org/v1/eth/avghashrate/" + walletAddress).Result;
+        HttpResponseMessage response = this.client.GetAsync("https://api.nanopool.org/v1/" + coin + "/avghashrate/" + walletAddress).Result;
         if (response.IsSuccessStatusCode)
         {
             JObject responseJson = JObject.Parse(response.Content.ReadAsStringAsync().Result);

@@ -505,3 +505,127 @@
 [2021-02-13 22:30:03.136]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2296384
 [2021-02-13 22:30:21.666] Ctrl+C received, exiting
 [2021-02-13 22:30:21.676]  cpu  stopped (6 ms)
+ * ABOUT        XMRig/5.0.1 gcc/9.2.0
+ * LIBS         libuv/1.31.0 OpenSSL/1.1.1c hwloc/2.0.4
+ * HUGE PAGES   unavailable
+ * CPU          AMD Ryzen 5 1600 Six-Core Processor (1) x64 AES
+                L2:3.0 MB L3:16.0 MB 6C/12T NUMA:1
+ * DONATE       1%
+ * ASSEMBLY     auto:ryzen
+ * POOL #1      xmr-us-east1.nanopool.org:14444 algo rx/0
+ * COMMANDS     hashrate, pause, resume
+ * OPENCL       disabled
+ * CUDA         disabled
+[2021-02-16 13:08:17.959]  net  use pool xmr-us-east1.nanopool.org:14444  144.217.14.139
+[2021-02-16 13:08:17.961]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298278
+[2021-02-16 13:08:17.961]  rx   init dataset algo rx/0 (12 threads) seed b353f283ee2e4460...
+[2021-02-16 13:08:17.962]  rx   allocated 2336 MB (2080+256) huge pages 0% 0/1168 +JIT (0 ms)
+[2021-02-16 13:08:22.155]  rx   dataset ready (4194 ms)
+[2021-02-16 13:08:22.155]  cpu  use profile  rx  (8 threads) scratchpad 2048 KB
+[2021-02-16 13:08:22.161]  cpu  READY threads 8/8 (8) huge pages 0% 0/8 memory 16384 KB (5 ms)
+[2021-02-16 13:09:05.928]  cpu  accepted (1/0) diff 480045 (130 ms)
+[2021-02-16 13:09:11.369]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298278
+[2021-02-16 13:09:22.997] speed 10s/60s/15m 1732.5 1718.1 n/a H/s max 1743.0 H/s
+[2021-02-16 13:09:37.895]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298279
+[2021-02-16 13:10:23.851] speed 10s/60s/15m 1557.7 1675.5 n/a H/s max 1744.5 H/s
+[2021-02-16 13:10:38.013]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298279
+[2021-02-16 13:10:46.490]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298280
+[2021-02-16 13:11:24.615] speed 10s/60s/15m 1746.2 1642.8 n/a H/s max 1750.2 H/s
+[2021-02-16 13:11:46.764]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298280
+[2021-02-16 13:12:13.812]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298281
+[2021-02-16 13:12:25.470] speed 10s/60s/15m 1647.3 1714.5 n/a H/s max 1750.2 H/s
+[2021-02-16 13:13:14.221]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298281
+[2021-02-16 13:13:26.305] speed 10s/60s/15m 1660.7 1645.2 n/a H/s max 1750.2 H/s
+[2021-02-16 13:14:14.400]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298281
+[2021-02-16 13:14:27.175] speed 10s/60s/15m 1690.0 1704.4 n/a H/s max 1750.2 H/s
+[2021-02-16 13:14:41.028]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298282
+[2021-02-16 13:15:28.148] speed 10s/60s/15m 1418.9 1507.1 n/a H/s max 1750.2 H/s
+[2021-02-16 13:15:41.611]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298282
+[2021-02-16 13:15:46.874]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298283
+[2021-02-16 13:16:28.941] speed 10s/60s/15m 1686.8 1638.6 n/a H/s max 1750.2 H/s
+[2021-02-16 13:16:47.297]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298283
+[2021-02-16 13:17:29.851] speed 10s/60s/15m 1711.0 1662.0 n/a H/s max 1750.2 H/s
+[2021-02-16 13:17:47.717]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298283
+[2021-02-16 13:18:30.723] speed 10s/60s/15m 1372.2 1621.9 n/a H/s max 1750.2 H/s
+[2021-02-16 13:18:47.587]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298283
+[2021-02-16 13:19:31.650] speed 10s/60s/15m 1461.0 1544.4 n/a H/s max 1750.2 H/s
+[2021-02-16 13:19:48.408]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298283
+[2021-02-16 13:20:32.556] speed 10s/60s/15m 1526.8 1547.0 n/a H/s max 1750.2 H/s
+[2021-02-16 13:20:47.951]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298283
+[2021-02-16 13:21:33.400] speed 10s/60s/15m 1616.7 1554.1 n/a H/s max 1750.2 H/s
+[2021-02-16 13:21:48.820]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298283
+[2021-02-16 13:22:34.198] speed 10s/60s/15m 1490.9 1610.7 n/a H/s max 1750.2 H/s
+[2021-02-16 13:22:48.910]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298283
+[2021-02-16 13:22:50.728]  cpu  accepted (2/0) diff 480045 (125 ms)
+[2021-02-16 13:23:00.555]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298284
+[2021-02-16 13:23:35.084] speed 10s/60s/15m 1380.9 1594.1 1624.3 H/s max 1750.2 H/s
+[2021-02-16 13:24:00.621]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298284
+[2021-02-16 13:24:08.754]  cpu  accepted (3/0) diff 480045 (125 ms)
+[2021-02-16 13:24:35.975] speed 10s/60s/15m 1662.0 1544.5 1613.1 H/s max 1750.2 H/s
+[2021-02-16 13:25:01.130]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298284
+[2021-02-16 13:25:02.177]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298285
+[2021-02-16 13:25:08.206]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298286
+[2021-02-16 13:25:14.987]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298287
+[2021-02-16 13:25:36.909] speed 10s/60s/15m 1401.8 1414.5 1597.4 H/s max 1750.2 H/s
+[2021-02-16 13:26:07.075]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298288
+[2021-02-16 13:26:37.799] speed 10s/60s/15m 1579.3 1453.4 1581.8 H/s max 1750.2 H/s
+[2021-02-16 13:27:00.900]  cpu  accepted (4/0) diff 480045 (125 ms)
+[2021-02-16 13:27:07.303]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298288
+[2021-02-16 13:27:08.289]  cpu  accepted (5/0) diff 480045 (131 ms)
+[2021-02-16 13:27:38.702] speed 10s/60s/15m 1429.6 1440.1 1563.9 H/s max 1750.2 H/s
+[2021-02-16 13:27:41.623]  cpu  accepted (6/0) diff 480045 (134 ms)
+[2021-02-16 13:28:08.046]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298288
+[2021-02-16 13:28:39.667] speed 10s/60s/15m 1541.0 1510.0 1554.9 H/s max 1750.2 H/s
+[2021-02-16 13:29:08.291]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298288
+[2021-02-16 13:29:40.585] speed 10s/60s/15m 1399.6 1457.4 1539.4 H/s max 1750.2 H/s
+[2021-02-16 13:30:08.896]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298288
+[2021-02-16 13:30:41.510] speed 10s/60s/15m 1257.4 1497.1 1539.3 H/s max 1750.2 H/s
+[2021-02-16 13:31:08.949]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298288
+[2021-02-16 13:31:42.309] speed 10s/60s/15m 1495.5 1604.4 1535.3 H/s max 1750.2 H/s
+[2021-02-16 13:32:09.390]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298288
+[2021-02-16 13:32:43.213] speed 10s/60s/15m 1425.1 1507.7 1525.2 H/s max 1750.2 H/s
+[2021-02-16 13:33:08.180]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298288
+[2021-02-16 13:33:42.970]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298289
+[2021-02-16 13:33:44.066] speed 10s/60s/15m 1458.4 1596.9 1528.4 H/s max 1750.2 H/s
+[2021-02-16 13:34:43.624]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298289
+[2021-02-16 13:34:45.021] speed 10s/60s/15m 1546.0 1539.7 1527.1 H/s max 1750.2 H/s
+[2021-02-16 13:34:57.184]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298290
+[2021-02-16 13:35:45.936] speed 10s/60s/15m 1542.3 1513.4 1522.1 H/s max 1750.2 H/s
+[2021-02-16 13:35:57.438]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298290
+[2021-02-16 13:36:46.740] speed 10s/60s/15m 1630.7 1662.5 1528.8 H/s max 1750.2 H/s
+[2021-02-16 13:36:57.558]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298290
+[2021-02-16 13:37:47.739] speed 10s/60s/15m 1485.2 1487.6 1519.5 H/s max 1750.2 H/s
+[2021-02-16 13:37:58.172]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298290
+[2021-02-16 13:38:48.614] speed 10s/60s/15m 1669.1 1580.4 1519.4 H/s max 1750.2 H/s
+[2021-02-16 13:38:57.741]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298290
+[2021-02-16 13:39:49.363] speed 10s/60s/15m 1607.4 1633.8 1525.4 H/s max 1750.2 H/s
+[2021-02-16 13:39:58.018]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298290
+[2021-02-16 13:40:11.786]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298291
+[2021-02-16 13:40:18.842]  cpu  accepted (7/0) diff 480045 (124 ms)
+[2021-02-16 13:40:50.256] speed 10s/60s/15m 1467.6 1540.5 1536.4 H/s max 1750.2 H/s
+[2021-02-16 13:40:56.067]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298292
+[2021-02-16 13:41:51.125] speed 10s/60s/15m 1493.8 1531.8 1538.8 H/s max 1750.2 H/s
+[2021-02-16 13:41:56.280]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298292
+[2021-02-16 13:42:52.092] speed 10s/60s/15m 1434.7 1482.8 1540.7 H/s max 1750.2 H/s
+[2021-02-16 13:42:56.351]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298292
+[2021-02-16 13:43:53.054] speed 10s/60s/15m 1286.5 1524.4 1541.5 H/s max 1750.2 H/s
+[2021-02-16 13:43:56.638]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298292
+[2021-02-16 13:44:14.449]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298293
+[2021-02-16 13:44:53.964] speed 10s/60s/15m 1552.3 1423.9 1539.2 H/s max 1750.2 H/s
+[2021-02-16 13:45:14.878]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298293
+[2021-02-16 13:45:16.933]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298294
+[2021-02-16 13:45:32.681]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298295
+[2021-02-16 13:45:54.921] speed 10s/60s/15m 1557.9 1513.4 1542.4 H/s max 1750.2 H/s
+[2021-02-16 13:46:32.960]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298295
+[2021-02-16 13:46:39.066]  cpu  accepted (8/0) diff 480045 (146 ms)
+[2021-02-16 13:46:55.878] speed 10s/60s/15m 1519.6 1423.8 1529.6 H/s max 1750.2 H/s
+[2021-02-16 13:47:33.552]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298295
+[2021-02-16 13:47:40.572]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298296
+[2021-02-16 13:47:56.744] speed 10s/60s/15m 1359.3 1486.7 1528.4 H/s max 1750.2 H/s
+[2021-02-16 13:48:40.724]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298296
+[2021-02-16 13:48:57.664] speed 10s/60s/15m 1512.6 1443.9 1518.0 H/s max 1750.2 H/s
+[2021-02-16 13:49:01.103]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298297
+[2021-02-16 13:49:53.774]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298298
+[2021-02-16 13:49:58.541] speed 10s/60s/15m 1596.9 1509.4 1516.7 H/s max 1750.2 H/s
+[2021-02-16 13:50:53.445]  net  new job from xmr-us-east1.nanopool.org:14444 diff 480045 algo rx/0 height 2298299
+[2021-02-16 13:50:59.473] speed 10s/60s/15m 1469.3 1469.6 1512.0 H/s max 1750.2 H/s
