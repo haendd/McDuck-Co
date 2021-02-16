@@ -6,6 +6,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -102,28 +104,29 @@ namespace McDuck
                 {
                     walletAddress = ethereumWalletAddressInput.Text;
                     poolAddress = ethereumPoolAddressInput.Text;
-                    StreamWriter sw = new StreamWriter(current + "\\Mining\\Ethereum\\1_Ehereum-nanopool.bat");
-                    sw.WriteLine("EthDcrMiner64.exe -epool " + poolAddress + " -ewal " + walletAddress +
-                                 " -eworker Claymore -epsw x -mode 1 -r 0 -dbg -1 -mport 0 -etha 0 -retrydelay 1 -ftime 55 -tt 79 -ttli 77 -tstop 89 -tstart 79");
-                    sw.WriteLine("pause");
-                    sw.Close();
-
-                    var process = new Process();
-                    var startinfo = new ProcessStartInfo("1_Ehereum-nanopool.bat");
-
-                    startinfo.RedirectStandardOutput = false;
-                    startinfo.UseShellExecute = false;
-                    startinfo.CreateNoWindow = false;
-                    process.StartInfo = startinfo;
-                    process.EnableRaisingEvents = true;
-
-                    np = new nProcess(process, Directory.GetCurrentDirectory() + "\\Mining\\Ethereum");
-                    np.ths = new ThreadStart(() => np.launchMiner());
-                    np.th = new Thread(np.ths);
-
-                    runing = true;
-                    np.th.Start();
-                    break;
+                        // StreamWriter sw = new StreamWriter(current + "\\Mining\\Ethereum\\1_Ehereum-nanopool.bat");
+                        // sw.WriteLine("EthDcrMiner64.exe -epool " + poolAddress + " -ewal " + walletAddress + " -eworker Claymore -epsw x -mode 1 -r 0 -dbg -1 -mport 0 -etha 0 -retrydelay 1 -ftime 55 -tt 79 -ttli 77 -tstop 89 -tstart 79");
+                        // sw.WriteLine("pause");
+                        // sw.Close();
+                        //
+                        // var process = new Process();
+                        // var startinfo = new ProcessStartInfo("1_Ehereum-nanopool.bat");
+                        //
+                        // startinfo.RedirectStandardOutput = false;
+                        // startinfo.UseShellExecute = false;
+                        // startinfo.CreateNoWindow = false;
+                        // process.StartInfo = startinfo;
+                        // process.EnableRaisingEvents = true;
+                        //
+                        // np = new nProcess(process, Directory.GetCurrentDirectory() + "\\Mining\\Ethereum");
+                        // np.ths = new ThreadStart(() => np.launchMiner());
+                        // np.th = new Thread(np.ths);
+                        //
+                        // runing = true;
+                        // np.th.Start();
+                        NanoPoolsAPI yikes = new NanoPoolsAPI();
+                        double x = GetDollarsPerDay(yikes.getAverageHashrate(walletAddress));
+                        break;
                 }
                 case "Monero":
                 {
@@ -204,6 +207,7 @@ namespace McDuck
 
         }
 
+
         private void saveButton_Click(object sender, EventArgs e)
         {
             if (runing)
@@ -227,7 +231,18 @@ namespace McDuck
             sw.Close();
         }
 
+        private double GetDollarsPerDay(Double hashrate)
+        {
+            var networkHashRate = 420157;
+            var totalMoneyPerDay = 46337706.66;
+            var yourHashRate = hashrate / 1000;
+            var profit_ratio =  yourHashRate / networkHashRate;
+            return totalMoneyPerDay * profit_ratio;
+        }
+
     }
+
+ 
 
     public class nProcess
     {
@@ -248,4 +263,64 @@ namespace McDuck
             bool started = process.Start();
         }
     }
+
 }
+
+
+public class NanoPoolsAPI
+{
+    private HttpClient client;
+    public NanoPoolsAPI()
+    {
+         this.client = new HttpClient();
+    }
+
+    public double getMinerBalance(String walletAddress)
+    {
+        
+        HttpResponseMessage response = this.client.GetAsync("https://api.nanopool.org/v1/eth/balance/" + walletAddress).Result;
+        if (response.IsSuccessStatusCode)
+        {
+            JObject responseJson = JObject.Parse(response.Content.ReadAsStringAsync().Result);
+            return Convert.ToDouble(responseJson["data"]);
+        }
+        else
+        {
+            return -1;
+        }
+
+    }
+
+    public double getCurrentHashrate(String walletAddress)
+    { 
+        HttpResponseMessage response = this.client.GetAsync("https://api.nanopool.org/v1/eth/hashrate/" + walletAddress).Result;
+        if (response.IsSuccessStatusCode)
+        {
+            JObject responseJson = JObject.Parse(response.Content.ReadAsStringAsync().Result);
+            return Convert.ToDouble(responseJson["data"]);
+        }
+        else
+        {
+            return -1;
+        }
+
+    }
+
+    public double getAverageHashrate(String walletAddress)
+    {
+        HttpResponseMessage response = this.client.GetAsync("https://api.nanopool.org/v1/eth/avghashrate/" + walletAddress).Result;
+        if (response.IsSuccessStatusCode)
+        {
+            JObject responseJson = JObject.Parse(response.Content.ReadAsStringAsync().Result);
+            return Convert.ToDouble(responseJson["data"]["h1"]);
+        }
+        else
+        {
+            return -1;
+        }
+
+    }
+}
+
+
+
