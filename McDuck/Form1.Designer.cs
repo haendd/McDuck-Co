@@ -448,7 +448,7 @@
             this.moneroSetupPage.Name = "moneroSetupPage";
             this.moneroSetupPage.Padding = new System.Windows.Forms.Padding(3);
             this.moneroSetupPage.Size = new System.Drawing.Size(333, 305);
-            this.moneroSetupPage.TabIndex = 1;
+            this.moneroSetupPage.TabIndex = 0;
             this.moneroSetupPage.Text = "Monero";
             this.moneroSetupPage.UseVisualStyleBackColor = true;
             // 
