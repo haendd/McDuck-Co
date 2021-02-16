@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form));
             this.mainTabControl = new System.Windows.Forms.TabControl();
             this.homePage = new System.Windows.Forms.TabPage();
@@ -67,6 +68,7 @@
             this.moneroPoolAddressLabel = new System.Windows.Forms.Label();
             this.moneroWalletAddressInput = new System.Windows.Forms.TextBox();
             this.moneroWalletAddressLabel = new System.Windows.Forms.Label();
+            this.profitUpdateTimer = new System.Windows.Forms.Timer(this.components);
             this.mainTabControl.SuspendLayout();
             this.homePage.SuspendLayout();
             this.homeTabControl.SuspendLayout();
@@ -164,18 +166,18 @@
             this.cpuProfitPerDayLabLab.AutoSize = true;
             this.cpuProfitPerDayLabLab.Location = new System.Drawing.Point(6, 237);
             this.cpuProfitPerDayLabLab.Name = "cpuProfitPerDayLabLab";
-            this.cpuProfitPerDayLabLab.Size = new System.Drawing.Size(105, 15);
+            this.cpuProfitPerDayLabLab.Size = new System.Drawing.Size(158, 15);
             this.cpuProfitPerDayLabLab.TabIndex = 6;
-            this.cpuProfitPerDayLabLab.Text = "CPU Profit Per Day";
+            this.cpuProfitPerDayLabLab.Text = "Projected CPU Profit Per Day";
             // 
             // gpuProfitPerDayLabLab
             // 
             this.gpuProfitPerDayLabLab.AutoSize = true;
             this.gpuProfitPerDayLabLab.Location = new System.Drawing.Point(6, 261);
             this.gpuProfitPerDayLabLab.Name = "gpuProfitPerDayLabLab";
-            this.gpuProfitPerDayLabLab.Size = new System.Drawing.Size(105, 15);
+            this.gpuProfitPerDayLabLab.Size = new System.Drawing.Size(158, 15);
             this.gpuProfitPerDayLabLab.TabIndex = 6;
-            this.gpuProfitPerDayLabLab.Text = "GPU Profit Per Day";
+            this.gpuProfitPerDayLabLab.Text = "Projected GPU Profit Per Day";
             // 
             // profitPerDayLabel
             // 
@@ -193,9 +195,9 @@
             this.profitPerDayLabLab.AutoSize = true;
             this.profitPerDayLabLab.Location = new System.Drawing.Point(6, 285);
             this.profitPerDayLabLab.Name = "profitPerDayLabLab";
-            this.profitPerDayLabLab.Size = new System.Drawing.Size(107, 15);
+            this.profitPerDayLabLab.Size = new System.Drawing.Size(160, 15);
             this.profitPerDayLabLab.TabIndex = 4;
-            this.profitPerDayLabLab.Text = "Total Profit Per Day";
+            this.profitPerDayLabLab.Text = "Projected Total Profit Per Day";
             // 
             // gpuStatusLabLab
             // 
@@ -497,6 +499,12 @@
             this.moneroWalletAddressLabel.TabIndex = 0;
             this.moneroWalletAddressLabel.Text = "Wallet Address";
             // 
+            // profitUpdateTimer
+            // 
+            this.profitUpdateTimer.Enabled = true;
+            this.profitUpdateTimer.Interval = 15000;
+            this.profitUpdateTimer.Tick += new System.EventHandler(this.updateProfitsTimer);
+            // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -512,6 +520,7 @@
             this.Name = "Form";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "McDuck Crypto";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_FormClosing);
             this.Load += new System.EventHandler(this.Form_Load);
             this.mainTabControl.ResumeLayout(false);
             this.homePage.ResumeLayout(false);
@@ -572,6 +581,7 @@
         private System.Windows.Forms.Label cpuProfitPerDayLabel;
         private System.Windows.Forms.Label cpuProfitPerDayLabLab;
         private System.Windows.Forms.Label gpuProfitPerDayLabLab;
+        public System.Windows.Forms.Timer profitUpdateTimer;
     }
 }
 

@@ -22,7 +22,8 @@ namespace McDuck
         private nProcess gpuProcess;
         private bool cpuRunning = false;
         private bool gpuRunning = false;
-        private string type;
+        private string cpuActiveType = "";
+        private string gpuActiveType = "";
         private static string current;
         private Color activeColor = Color.LawnGreen;
         private Color deactiveColor = Color.LightCoral;
@@ -75,7 +76,6 @@ namespace McDuck
                             else
                                 moneroPoolAddressInput.SelectedIndex = 0;
                             break;
-                            break;
                         default:
 
                             break;
@@ -94,6 +94,7 @@ namespace McDuck
         {
             Directory.SetCurrentDirectory(current);
 
+            string type = "";
             bool isCPU = false;
             if( homeTabControl.SelectedTab == cpuPage )
             {
@@ -151,6 +152,7 @@ namespace McDuck
                         gpuRunning = true;
                         gpuStatusLabel.Text = "Running";
                         gpuStatusLabel.BackColor = activeColor;
+                        gpuActiveType = type;
                         gpuProcess.th.Start();
                         Thread.Sleep(0);
                     }
@@ -188,6 +190,7 @@ namespace McDuck
                         cpuRunning = true;
                         cpuStatusLabel.Text = "Running";
                         cpuStatusLabel.BackColor = activeColor;
+                        cpuActiveType = type;
                         cpuProcess.th.Start();
                         Thread.Sleep(0);
                     }
@@ -204,6 +207,7 @@ namespace McDuck
 
         private void stopButton_Click(object sender, EventArgs e)
         {
+            string type = "";
             bool isCPU = false;
             if(homeTabControl.SelectedTab == cpuPage)
             {
@@ -244,7 +248,8 @@ namespace McDuck
                         Directory.SetCurrentDirectory(current);
                         gpuRunning = false;
                         gpuStatusLabel.Text = "Not Running";
-                        gpuStatusLabel.BackColor = deactiveColor; 
+                        gpuStatusLabel.BackColor = deactiveColor;
+                        gpuActiveType = "";
                     }
                     break;
                 }
@@ -264,6 +269,7 @@ namespace McDuck
                         cpuRunning = false;
                         cpuStatusLabel.Text = "Not Running";
                         cpuStatusLabel.BackColor = deactiveColor;
+                        cpuActiveType = "";
                     }
                     else
                     {
@@ -301,7 +307,51 @@ namespace McDuck
             sw.Close();
         }
 
-        private double GetDollarsPerDay(Double hashrate)
+        private void updateProfitsTimer(object sender, EventArgs e)
+        {
+            NanoPoolsAPI nanoCaller = new NanoPoolsAPI();
+            double cpuProfit = 0;
+            double gpuProfit = 0;
+            double totalProfit = 0;
+
+            switch (cpuActiveType)
+            {
+                case "Monero":
+                    break;
+                default:
+                    break;
+            }
+
+            switch (gpuActiveType)
+            {
+                case "Ethereum":
+                    gpuProfit = getDollarsPerDay(nanoCaller.getCurrentHashrate(ethereumWalletAddressInput.Text));
+                    break;
+                default:
+                    break;
+            }
+
+            cpuProfitPerDayLabel.Text = cpuProfit.ToString("C2");
+            if (cpuProfit > 0)
+                cpuProfitPerDayLabel.BackColor = activeColor;
+            else
+                cpuProfitPerDayLabel.BackColor = deactiveColor;
+
+            gpuProfitPerDayLabel.Text = gpuProfit.ToString("C2");
+            if (gpuProfit > 0)
+                gpuProfitPerDayLabel.BackColor = activeColor;
+            else
+                gpuProfitPerDayLabel.BackColor = deactiveColor;
+
+            totalProfit = cpuProfit + gpuProfit;
+            profitPerDayLabel.Text = totalProfit.ToString("C2");
+            if (totalProfit > 0)
+                profitPerDayLabel.BackColor = activeColor;
+            else
+                profitPerDayLabel.BackColor = deactiveColor;
+        }
+
+        private double getDollarsPerDay(Double hashrate)
         {
             var networkHashRate = 420157;
             var totalMoneyPerDay = 46337706.66;
@@ -310,9 +360,62 @@ namespace McDuck
             return totalMoneyPerDay * profit_ratio;
         }
 
+        private void Form_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (cpuRunning)
+            {
+                switch (cpuActiveType)
+                {
+                    case "Monero":
+                        {
+                            foreach (var process in Process.GetProcessesByName("xmrig"))
+                            {
+                                process.Kill();
+                            }
+                            foreach (var process in Process.GetProcessesByName("cmd"))
+                            {
+                                process.Kill();
+                            }
+                            Directory.SetCurrentDirectory(current);
+                            cpuRunning = false;
+                            cpuStatusLabel.Text = "Not Running";
+                            cpuStatusLabel.BackColor = deactiveColor;
+                            cpuActiveType = "";
+                            break;
+                        }
+                    default:
+                        break;
+                }
+            }
+            if (gpuRunning)
+            {
+                switch (gpuActiveType)
+                {
+                    case "Ethereum":
+                        {
+                            foreach (var process in Process.GetProcessesByName("EthDcrMiner64"))
+                            {
+                                process.Kill();
+                            }
+                            foreach (var process in Process.GetProcessesByName("cmd"))
+                            {
+                                process.Kill();
+                            }
+                            Directory.SetCurrentDirectory(current);
+                            gpuRunning = false;
+                            gpuStatusLabel.Text = "Not Running";
+                            gpuStatusLabel.BackColor = deactiveColor;
+                            gpuActiveType = "";
+                            break;
+                        }
+                    default:
+                        break;
+                }
+            }
+        }
     }
 
- 
+
 
     public class nProcess
     {
