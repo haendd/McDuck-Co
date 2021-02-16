@@ -22,6 +22,8 @@ namespace McDuck
         private bool gpuRunning = false;
         private string type;
         private static string current;
+        private Color activeColor = Color.LawnGreen;
+        private Color deactiveColor = Color.LightCoral;
 
         public Form()
         {
@@ -32,6 +34,7 @@ namespace McDuck
         private void Form_Load(object sender, EventArgs e)
         {
             string line;
+            int i;
             String configPath = Directory.GetCurrentDirectory();
             configPath += "\\config.txt";
             if (!File.Exists(configPath)) 
@@ -57,12 +60,19 @@ namespace McDuck
                         case "ETH":
                             ethereumWalletAddressInput.Text = line.Substring(4);
                             line = sr.ReadLine();
-                            ethereumPoolAddressInput.Text = line.Substring(4);
+                            if(Int32.TryParse(line.Substring(4), out i))
+                                ethereumPoolAddressInput.SelectedIndex = i;
+                            else
+                                ethereumPoolAddressInput.SelectedIndex = 0;
                             break;
                         case "XMR":
                             moneroWalletAddressInput.Text = line.Substring(4);
                             line = sr.ReadLine();
-                            moneroPoolAddressInput.Text = line.Substring(4);
+                            if (Int32.TryParse(line.Substring(4), out i))
+                                moneroPoolAddressInput.SelectedIndex = i;
+                            else
+                                moneroPoolAddressInput.SelectedIndex = 0;
+                            break;
                             break;
                         default:
 
@@ -137,7 +147,8 @@ namespace McDuck
                         gpuProcess.th = new Thread(gpuProcess.ths);
 
                         gpuRunning = true;
-                        gpuStatusLabel.Text = "GPU Mining Status: Running";
+                        gpuStatusLabel.Text = "Running";
+                        gpuStatusLabel.BackColor = activeColor;
                         gpuProcess.th.Start();
                         Thread.Sleep(0);
                     }
@@ -173,7 +184,8 @@ namespace McDuck
                         cpuProcess.th = new Thread(cpuProcess.ths);
 
                         cpuRunning = true;
-                        cpuStatusLabel.Text = "CPU Mining Status: Running";
+                        cpuStatusLabel.Text = "Running";
+                        cpuStatusLabel.BackColor = activeColor;
                         cpuProcess.th.Start();
                         Thread.Sleep(0);
                     }
@@ -229,7 +241,8 @@ namespace McDuck
                         }
                         Directory.SetCurrentDirectory(current);
                         gpuRunning = false;
-                        gpuStatusLabel.Text = "GPU Mining Status: Not Running";
+                        gpuStatusLabel.Text = "Not Running";
+                        gpuStatusLabel.BackColor = deactiveColor; 
                     }
                     break;
                 }
@@ -247,7 +260,8 @@ namespace McDuck
                         }
                         Directory.SetCurrentDirectory(current);
                         cpuRunning = false;
-                        cpuStatusLabel.Text = "CPU Mining Status: Not Running";
+                        cpuStatusLabel.Text = "Not Running";
+                        cpuStatusLabel.BackColor = deactiveColor;
                     }
                     else
                     {
@@ -274,11 +288,11 @@ namespace McDuck
 
             start = "ETH ";
             sw.WriteLine(start + ethereumWalletAddressInput.Text);
-            sw.WriteLine(start + ethereumPoolAddressInput.Text);
+            sw.WriteLine(start + ethereumPoolAddressInput.SelectedIndex);
 
             start = "XMR ";
             sw.WriteLine(start + moneroWalletAddressInput.Text);
-            sw.WriteLine(start + moneroPoolAddressInput.Text);
+            sw.WriteLine(start + moneroPoolAddressInput.SelectedIndex);
 
             //close the file
             sw.Close();
