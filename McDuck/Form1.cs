@@ -25,6 +25,7 @@ namespace McDuck
         private string cpuActiveType = "";
         private string gpuActiveType = "";
         private static string current;
+        private bool showMinerWindows = true;
         private Color activeColor = Color.LawnGreen;
         private Color deactiveColor = Color.LightCoral;
 
@@ -141,7 +142,7 @@ namespace McDuck
 
                         startinfo.RedirectStandardOutput = false;
                         startinfo.UseShellExecute = false;
-                        startinfo.CreateNoWindow = false;
+                        startinfo.CreateNoWindow = showMinerWindows;
                         process.StartInfo = startinfo;
                         process.EnableRaisingEvents = true;
 
@@ -179,7 +180,7 @@ namespace McDuck
 
                         startinfo.RedirectStandardOutput = false;
                         startinfo.UseShellExecute = false;
-                        startinfo.CreateNoWindow = false;
+                        startinfo.CreateNoWindow = showMinerWindows;
                         process.StartInfo = startinfo;
                         process.EnableRaisingEvents = true;
 
@@ -317,7 +318,7 @@ namespace McDuck
             switch (cpuActiveType)
             {
                 case "Monero":
-                    cpuProfit = getDollarsPerDayxmr(nanoCaller.getCurrentHashrate(moneroWalletAddressInput.Text, "xmr"));
+                    cpuProfit = getDollarsPerDayXMR(nanoCaller.getCurrentHashrate(moneroWalletAddressInput.Text, "xmr"));
                     break;
                 default:
                     break;
@@ -326,7 +327,7 @@ namespace McDuck
             switch (gpuActiveType)
             {
                 case "Ethereum":
-                    gpuProfit = getDollarsPerDayeth(nanoCaller.getCurrentHashrate(ethereumWalletAddressInput.Text, "eth"));
+                    gpuProfit = getDollarsPerDayETH(nanoCaller.getCurrentHashrate(ethereumWalletAddressInput.Text, "eth"));
                     break;
                 default:
                     break;
@@ -353,7 +354,7 @@ namespace McDuck
         }
 
 
-        private double getDollarsPerDayxmr(Double hashrate)
+        private double getDollarsPerDayXMR(Double hashrate)
         {
             var networkHashRate = 2022000000;
             var totalMoneyPerDay = 183332.333393;
@@ -361,7 +362,7 @@ namespace McDuck
             var profit_ratio = yourHashRate / networkHashRate;
             return totalMoneyPerDay * profit_ratio;
         }
-        private double getDollarsPerDayeth(Double hashrate)
+        private double getDollarsPerDayETH(Double hashrate)
         {
             var networkHashRate = 420157;
             var totalMoneyPerDay = 46337706.66;
@@ -422,6 +423,11 @@ namespace McDuck
                         break;
                 }
             }
+        }
+
+        private void showMinerWindowsInput_CheckedChanged(object sender, EventArgs e)
+        {
+            showMinerWindows = !showMinerWindowsInput.Checked;
         }
     }
 

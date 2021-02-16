@@ -68,6 +68,9 @@
             this.moneroPoolAddressLabel = new System.Windows.Forms.Label();
             this.moneroWalletAddressInput = new System.Windows.Forms.TextBox();
             this.moneroWalletAddressLabel = new System.Windows.Forms.Label();
+            this.optionsPage = new System.Windows.Forms.TabPage();
+            this.showMinerWindowsInput = new System.Windows.Forms.CheckBox();
+            this.launchAsNewWindowLab = new System.Windows.Forms.Label();
             this.profitUpdateTimer = new System.Windows.Forms.Timer(this.components);
             this.mainTabControl.SuspendLayout();
             this.homePage.SuspendLayout();
@@ -79,12 +82,14 @@
             this.cryptoTypePages.SuspendLayout();
             this.ethereumSetupPage.SuspendLayout();
             this.moneroSetupPage.SuspendLayout();
+            this.optionsPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainTabControl
             // 
             this.mainTabControl.Controls.Add(this.homePage);
             this.mainTabControl.Controls.Add(this.walletSetupPage);
+            this.mainTabControl.Controls.Add(this.optionsPage);
             this.mainTabControl.HotTrack = true;
             this.mainTabControl.Location = new System.Drawing.Point(0, 0);
             this.mainTabControl.Margin = new System.Windows.Forms.Padding(0);
@@ -499,6 +504,38 @@
             this.moneroWalletAddressLabel.TabIndex = 0;
             this.moneroWalletAddressLabel.Text = "Wallet Address";
             // 
+            // optionsPage
+            // 
+            this.optionsPage.BackColor = System.Drawing.Color.White;
+            this.optionsPage.Controls.Add(this.showMinerWindowsInput);
+            this.optionsPage.Controls.Add(this.launchAsNewWindowLab);
+            this.optionsPage.Location = new System.Drawing.Point(4, 24);
+            this.optionsPage.Name = "optionsPage";
+            this.optionsPage.Size = new System.Drawing.Size(337, 328);
+            this.optionsPage.TabIndex = 2;
+            this.optionsPage.Text = "Options";
+            // 
+            // showMinerWindowsInput
+            // 
+            this.showMinerWindowsInput.AutoSize = true;
+            this.showMinerWindowsInput.Location = new System.Drawing.Point(313, 10);
+            this.showMinerWindowsInput.Name = "showMinerWindowsInput";
+            this.showMinerWindowsInput.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.showMinerWindowsInput.Size = new System.Drawing.Size(15, 14);
+            this.showMinerWindowsInput.TabIndex = 1;
+            this.showMinerWindowsInput.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.showMinerWindowsInput.UseVisualStyleBackColor = true;
+            this.showMinerWindowsInput.CheckedChanged += new System.EventHandler(this.showMinerWindowsInput_CheckedChanged);
+            // 
+            // launchAsNewWindowLab
+            // 
+            this.launchAsNewWindowLab.AutoSize = true;
+            this.launchAsNewWindowLab.Location = new System.Drawing.Point(8, 10);
+            this.launchAsNewWindowLab.Name = "launchAsNewWindowLab";
+            this.launchAsNewWindowLab.Size = new System.Drawing.Size(147, 15);
+            this.launchAsNewWindowLab.TabIndex = 0;
+            this.launchAsNewWindowLab.Text = "Show miners cmd window";
+            // 
             // profitUpdateTimer
             // 
             this.profitUpdateTimer.Enabled = true;
@@ -537,6 +574,8 @@
             this.ethereumSetupPage.PerformLayout();
             this.moneroSetupPage.ResumeLayout(false);
             this.moneroSetupPage.PerformLayout();
+            this.optionsPage.ResumeLayout(false);
+            this.optionsPage.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -582,6 +621,9 @@
         private System.Windows.Forms.Label cpuProfitPerDayLabLab;
         private System.Windows.Forms.Label gpuProfitPerDayLabLab;
         public System.Windows.Forms.Timer profitUpdateTimer;
+        private System.Windows.Forms.TabPage optionsPage;
+        private System.Windows.Forms.CheckBox showMinerWindowsInput;
+        private System.Windows.Forms.Label launchAsNewWindowLab;
     }
 }
 
